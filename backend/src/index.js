@@ -1,10 +1,8 @@
 /* ***** Servidor ***** */
 require('dotenv').config();
-
-const app = require('./app');
 require('colors');
 
-app.set('port', 4000);
+const app = require('./app');
 const port = app.get('port');
 
 require('./database');
