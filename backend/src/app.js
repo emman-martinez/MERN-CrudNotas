@@ -13,8 +13,9 @@ app.use(cors());
 app.use(json);
 
 // Routes: urls que la aplicación puede visitar
-app.get('/api/users', (req, res) => res.send('Users Routes'));
-app.get('/api/notes', (req, res) => res.send('Notes Routes'));
+const [ users, notes ] = [require('./routes/users'), require('./routes/notes')];
+app.use('/api/users', users);
+app.use('/api/notes', notes); 
 
 
 module.exports = app;
