@@ -1,10 +1,22 @@
 # MERN-CrudNotas
 Stack MERN: Aplicación de Notas con MongoDB, ExpressJS, ReactJS y NodeJS
 
-## npm init
+## Backend
 
-## Express, Mongoose, Cors, Dotenv
-### >npm i express mongoose cors dotenv
+### Express, Mongoose, Cors, Dotenv
+### Nodemon
+### Package.json
 
-## Nodemon
-### >npm i nodemon --save-dev o >npm i nodemon -D
+#### npm init
+#### >npm i express mongoose cors dotenv
+#### >npm i nodemon --save-dev o >npm i nodemon -D
+
+## Frontend
+
+### Router
+#### >npm install react-router-dom
+
+### Gulp para SASS
+#### src>npm install -g gulp gulp-cli 
+#### src>npm init (package.json) 
+#### src>npm install --save-dev gulp gulp-autoprefixer gulp-sass
