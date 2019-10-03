@@ -23,3 +23,6 @@ Stack MERN: Aplicación de Notas con MongoDB, ExpressJS, ReactJS y NodeJS
 
 ### Bootstrap
 #### npm install bootstrap
+
+### Axios
+#### npm install axios

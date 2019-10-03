@@ -14,11 +14,13 @@ function App() {
     <Router>
       { /* Componente: Navigation */ }
       <Navigation/>
-      { /* Rutas */ }
-      <Route path="/" exact component={NotesList}/>
-      <Route path="/edit/:id" component={CreateNote}/>
-      <Route path="/create" component={CreateNote}/>
-      <Route path="/user" component={CreateUser}/>
+      <div className="container p-4">
+        { /* Rutas */ }
+        <Route path="/" exact component={NotesList}/>
+        <Route path="/edit/:id" component={CreateNote}/>
+        <Route path="/create" component={CreateNote}/>
+        <Route path="/user" component={CreateUser}/>
+      </div>
     </Router>
   );
 }
