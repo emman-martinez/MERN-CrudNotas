@@ -20,3 +20,6 @@ Stack MERN: Aplicación de Notas con MongoDB, ExpressJS, ReactJS y NodeJS
 #### src>npm install -g gulp gulp-cli 
 #### src>npm init (package.json) 
 #### src>npm install --save-dev gulp gulp-autoprefixer gulp-sass
+
+### Bootstrap
+#### npm install bootstrap
