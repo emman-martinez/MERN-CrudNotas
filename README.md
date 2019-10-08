@@ -26,3 +26,6 @@ Stack MERN: Aplicación de Notas con MongoDB, ExpressJS, ReactJS y NodeJS
 
 ### Axios
 #### npm install axios
+
+### React-DatePicker
+#### frontend>npm install react-datepicker

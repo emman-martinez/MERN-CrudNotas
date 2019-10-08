@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.min.css';
 
 class CreateNote extends Component {
 
     state = {
         users: [],
-        userSelected: ''
+        userSelected: '',
+        title: '',
+        content: '',
+        date: new Date()
     }
 
     async componentDidMount() {
@@ -18,18 +23,30 @@ class CreateNote extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-
+        const { userSelected, title, content } = this.state;
+        console.log(userSelected, title, content);
     }
 
     onInputChange = (e) => {
-        //console.log(e.target.value);
+        // console.log(e.target.name ,e.target.value);
         this.setState({
-            userSelected: e.target.value
+            //userSelected: e.target.value,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    onChangeDate = (date) => {
+        this.setState({
+            date: date
         })
     }
 
     render() {
+
         const users = this.state.users;
+        //const { userSelected, title, content } = this.state;
+        //console.log(userSelected, title, content);
+
         return (
             <div className="col-md-6 offset-md-3">
                 <div className="card card-body">
@@ -57,7 +74,27 @@ class CreateNote extends Component {
                             className="form-control" 
                             placeholder="Title" 
                             name="title"
+                            onChange={this.onInputChange}
                             required
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <textarea 
+                            name="content"
+                            className="form-control"
+                            placeholder="Content"
+                            onChange={this.onInputChange}
+                            required
+                        >
+                        </textarea>
+                    </div>
+
+                    <div className="form-group">
+                        <DatePicker
+                            className="form-control"
+                            selected={this.state.date}
+                            onChange={this.onChangeDate}
                         />
                     </div>
 
