@@ -29,3 +29,6 @@ Stack MERN: Aplicación de Notas con MongoDB, ExpressJS, ReactJS y NodeJS
 
 ### React-DatePicker
 #### frontend>npm install react-datepicker
+
+### Timeago.js
+#### frontend>npm install timeago.js
