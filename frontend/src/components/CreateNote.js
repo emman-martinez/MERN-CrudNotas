@@ -10,7 +10,9 @@ class CreateNote extends Component {
         userSelected: '',
         title: '',
         content: '',
-        date: new Date()
+        date: new Date(),
+        editing: false,
+        _id: ''
     }
 
     async componentDidMount() {
@@ -20,11 +22,34 @@ class CreateNote extends Component {
             userSelected: res.data[0].username
         })
         // console.log(this.state.users);
+        const { id } = this.props.match.params;
+        console.log(id);
+        if(id) {
+            const res = await axios.get(`http://localhost:4000/api/notes/${id}`);
+            console.log(res.data);
+            const {title, content, date, author } = res.data;
+            this.setState({
+                title,
+                content,
+                date: new Date(date),
+                userSelected: author,
+                editing: true,
+                _id: id
+            })
+        }
+        
     };
 
     onSubmit = async (e) => {
         e.preventDefault();
-        const { userSelected, title, content, date } = this.state;
+
+        const { userSelected, 
+                title, 
+                content, 
+                date, 
+                editing,
+                _id 
+              } = this.state;
         //console.log(userSelected, title, content);
         const newNote = {
             title,
@@ -33,8 +58,14 @@ class CreateNote extends Component {
             author: userSelected
         }
         //console.log(newNote);
-        const res = await axios.post('http://localhost:4000/api/notes', newNote);
-        console.log(res);
+        console.log(editing);
+        if(editing) {
+            await axios.put(`http://localhost:4000/api/notes/${_id}`, newNote);
+        } else {
+            const res = await axios.post('http://localhost:4000/api/notes', newNote);
+            console.log(res);
+        }
+        
         window.location.href = '/';
     }
 
@@ -68,6 +99,7 @@ class CreateNote extends Component {
                             className="form-control"
                             name="userSelected"
                             onChange={this.onInputChange}
+                            value={this.state.userSelected}
                         >
                             {
                                 users.map(user => 
@@ -86,6 +118,7 @@ class CreateNote extends Component {
                             placeholder="Title" 
                             name="title"
                             onChange={this.onInputChange}
+                            value={this.state.title}
                             required
                         />
                     </div>
@@ -96,6 +129,7 @@ class CreateNote extends Component {
                             className="form-control"
                             placeholder="Content"
                             onChange={this.onInputChange}
+                            value={this.state.content}
                             required
                         >
                         </textarea>
