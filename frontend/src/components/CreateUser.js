@@ -9,6 +9,10 @@ class CreateUser extends Component {
     }
 
     async componentDidMount() {
+        this.getUsers(); 
+    }
+
+    getUsers = async (e) => {
         const res = await axios.get('http://localhost:4000/api/users'); 
         console.log(res);
         const { data } = res;
@@ -29,9 +33,20 @@ class CreateUser extends Component {
     onSubmit = async (e) => {
         e.preventDefault(); // Para no resetear la página por el formulario
         /* Enviar los datos al servidor */
-        await axios.post('http://localhost:4000/api/users', {
+        const res = await axios.post('http://localhost:4000/api/users', {
             username: this.state.username
         });
+        this.setState({
+            username: ''
+        });
+        this.getUsers();
+        console.log(res);
+    }
+
+    deleteUser = async (id) => {
+        await axios.delete(`http://localhost:4000/api/users/${id}`);
+        console.log(id);
+        this.getUsers(); 
     }
 
     render() {
@@ -49,6 +64,7 @@ class CreateUser extends Component {
                                 <input 
                                     type="text" 
                                     className="form-control" 
+                                    value={this.state.username}
                                     onChange={this.onChangeUsername}
                                     placeholder="New User..."/>
                             </div>
@@ -62,9 +78,15 @@ class CreateUser extends Component {
                     <ul className="list-group">
                         {
                             users.map(user => 
-                                (<li className="list-group-item list-group-item-action" key={user._id}>
-                                    {user.username}
-                                </li>)
+                                (
+                                    <li 
+                                        className="list-group-item list-group-item-action" 
+                                        key={user._id}
+                                        onDoubleClick={() => this.deleteUser(user._id)}
+                                    >
+                                            {user.username}
+                                    </li>
+                                )
                             )
                         }
                     </ul>
